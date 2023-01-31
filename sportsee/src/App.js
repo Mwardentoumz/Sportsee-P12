@@ -32,7 +32,6 @@ function App() {
             </div>
             <div className='charts-container-right'>
               <InfoList />
-
             </div>
           </div>
         </div>

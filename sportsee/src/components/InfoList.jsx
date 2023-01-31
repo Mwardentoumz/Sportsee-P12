@@ -1,27 +1,31 @@
 
 import styled from "styled-components";
-
-import { styleVar } from "../utils/styleColor";
 import InfoCard from "./Info";
 
 import { getUserName } from "../service/user.service";
 import { useEffect, useState } from "react";
 
 export default function InfoList() {
+    
+    
+    const [data, setData] = useState();
 
-
-    const [data, setData] = useState()
     useEffect(() => {
+        
         getUserName(18).then((data) => {
             setData(data.data.keyData)
         })
-    }, [])
+    }, [data])
 
     const keyData = data
+    console.log(keyData)
+    
 
+    
     return (
-        
+       keyData &&
             <InfoListContainer>
+
                 <InfoCard type="Calories" value={keyData.calorieCount} />
                 <InfoCard type="Protéines" value={keyData.proteinCount} />
                 <InfoCard type="Glucides" value={keyData.carbohydrateCount} />

@@ -14,6 +14,8 @@ export async function getUserName(userId) {
     
 }
 
+
+
 export async function getDailyActivityById(userId){
     try{
         const response = await axios.get(`${URL}/user/${userId}/activity`);

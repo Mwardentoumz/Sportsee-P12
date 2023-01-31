@@ -34,7 +34,10 @@ const formatValue = (value) => {
 }
 
 export default function InfoCard({ type, value }) {
+    
     return (
+
+        value &&
         <Card>
             <InfoContainer>
                 <ActivityImg src={iconType[type]} alt={type} />

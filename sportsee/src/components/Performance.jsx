@@ -11,7 +11,6 @@ export default function Performance() {
 
     useEffect(() => {
         getPerformanceById(18).then((data) => {
-            console.log(data)
             const formatData = data.data.data.map((data) => {
                 switch (data.kind) {
                     case 1:
@@ -34,7 +33,7 @@ export default function Performance() {
         });
     }, []);
 
-    console.log(data)
+    
     return (
         <PerformanceContainer>
             <ResponsiveContainer width="100%" height="100%">
