@@ -1,0 +1,21 @@
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    background-color: black;
+    width: 7rem;
+    color: white;
+}
+
+.small {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 24px;
+    transform: rotate(-90deg);
+    margin-top: 15rem;
+    /* display: flex; */
+    width: 10rem;
+}
