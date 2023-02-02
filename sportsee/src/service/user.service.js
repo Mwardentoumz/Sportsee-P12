@@ -3,6 +3,13 @@ import axios from 'axios';
 
 const URL = 'http://localhost:3000';
 
+/**
+ * functions to get specific user data from API endpoints
+ * @param {*} userId 
+ * @returns
+ *  
+ */
+
 export async function getUserName(userId) {
 
     try{

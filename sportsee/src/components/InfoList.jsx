@@ -5,8 +5,19 @@ import InfoCard from "./Info";
 import { getUserName } from "../service/user.service";
 import { useEffect, useState } from "react";
 
+
+
 export default function InfoList() {
     
+    /** 
+     * Get user data from API
+     * Set data in state
+     * @returns {void}
+     * @param {number} id
+     * @param {object} data
+     * @param {object} keyData
+     * 
+    */
     
     const [data, setData] = useState();
 

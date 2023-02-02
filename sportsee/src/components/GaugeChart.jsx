@@ -7,6 +7,15 @@ import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts';
 
 export default function SimpleChart() {
 
+    /**
+     * Get user data from API
+     * Set data in state
+     * @returns {void}
+     * @param {number} id
+     * @param {object} data
+     * @param {object} score
+     * 
+     */
     const [data, setData] = useState()
     useEffect(() => {
         getUserName(18).then((data) => {
@@ -15,6 +24,7 @@ export default function SimpleChart() {
     }, [])
 
     const score = data
+    
     const data01 = [
         { "name": "todayscore", "value": score, "fillColor": `${styleVar.primary500}` }, { "name": "notdoneyet", "value": 1 - score, "fillColor": "transparent" }]
     const data02 = [{ "name": "fillInWhite", "value": 1 }]

@@ -5,6 +5,16 @@ import { getDailyActivityById } from '../service/user.service';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function DailyChart() {
+
+  /**
+   * Get daily activity data from API
+   * Set data in state
+   * @returns {void}
+   * @param {number} id
+   * @param {object} data
+   * 
+   */
+
   const [data, setData] = useState([])
 
   

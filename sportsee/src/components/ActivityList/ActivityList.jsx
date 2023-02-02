@@ -6,6 +6,10 @@ import Activity from '../ActivityList/Activity/Activity.jsx';
 
 import './ActivityList.css';
 
+/**
+ * 
+ * @returns {JSX.Element}
+ */
 
 export default function ActivityList(){
     return(

@@ -6,6 +6,13 @@ import carbohydrateIcon from "../assets/carbs-icon.png";
 import proteinIcon from "../assets/protein-icon.png";
 import lipidIcon from "../assets/fat-icon.png";
 
+/**
+ * @param {string} type
+ * @param {number} value
+ * @returns {JSX.Element}
+ * 
+ */
+
 const iconType = {
     Calories: calorieIcon,
     Glucides: carbohydrateIcon,

@@ -9,6 +9,17 @@ import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } fro
 export default function Performance() {
     const [data, setData] = useState();
 
+    /**
+     * Get performance data from API
+     * Format data to display it in the chart
+     * Set data in state
+     * @returns {void}
+     * @param {number} id
+     * @param {object} data
+     * @param {object} formatData
+     * 
+     */
+
     useEffect(() => {
         getPerformanceById(18).then((data) => {
             const formatData = data.data.data.map((data) => {

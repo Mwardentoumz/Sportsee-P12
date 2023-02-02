@@ -7,6 +7,15 @@ import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip } from "rec
 
 export default function AverageDuration() {
 
+    /**
+     * Get average sessions data from API
+     * Set data in state
+     * @returns {void}
+     * @param {number} id
+     * @param {object} data
+     * 
+     */
+
     const [data, setData] = useState()
     useEffect(() => {
         getAverageSessionsById(18).then((data) => {

@@ -7,6 +7,15 @@ import { useState, useEffect } from 'react';
 
 export default function Hello(){
 
+/**
+ * Get user data from API
+ * Set data in state
+ * @returns {void}
+ * @param {number} id
+ * @param {object} data
+ * 
+ */
+
 // get the name of the user with a hook via service call
 
 const [firstName, setFirstName] = useState(''); // useState is a hook
