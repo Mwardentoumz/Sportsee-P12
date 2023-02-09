@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { styleVar } from '../utils/styleColor';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getDailyActivityById } from '../service/user.service';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -16,15 +17,21 @@ export default function DailyChart() {
    */
 
   const [data, setData] = useState([])
-
+  let { id } = useParams()
   
   useEffect(() => {
-    getDailyActivityById(18).then((data) => {
-      setData(data.data.sessions);
-    });
-  }, []);
+    const data = async () => {
+      const response = await getDailyActivityById(id)
+      if(!response) return alert('Une erreur est survenue')
+      setData(response.data.sessions)
+    }
+    data()
+  }, [id])
 
-  const Activity = data
+  for(let i = 0; i < data.length; i++) {
+    data[i].day = i + 1
+  }
+  
 
   return (
     <DailyActivityChartContainer>
@@ -43,7 +50,7 @@ export default function DailyChart() {
 
       <ResponsiveContainer height="100%" width="100%">
         <BarChart
-          data={Activity}
+          data={data}
           margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
           barGap={8}
           barCategoryGap="35%"

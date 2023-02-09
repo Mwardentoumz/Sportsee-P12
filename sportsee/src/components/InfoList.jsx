@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
 import InfoCard from "./Info";
+import { useParams } from "react-router-dom";
 
 import { getUserName } from "../service/user.service";
 import { useEffect, useState } from "react";
@@ -8,7 +9,7 @@ import { useEffect, useState } from "react";
 
 
 export default function InfoList() {
-    
+
     /** 
      * Get user data from API
      * Set data in state
@@ -18,31 +19,32 @@ export default function InfoList() {
      * @param {object} keyData
      * 
     */
-    
-    const [data, setData] = useState();
+
+    const [data, setData] = useState([]);
+    const { id } = useParams();
 
     useEffect(() => {
-        
-        getUserName(18).then((data) => {
-            setData(data.data.keyData)
-        })
-    }, [data])
+        const data = async () => {
+            const request = await getUserName(id);
+            console.log(request)
+            if (!request) return alert("data error");
+            setData(request.data);
+        };
+        data();
+    }, [id]);
 
-    const keyData = data
-    console.log(keyData)
-    
+    const keyData = data.keyData
 
-    
     return (
-       keyData &&
-            <InfoListContainer>
+        keyData &&
+        <InfoListContainer>
 
-                <InfoCard type="Calories" value={keyData.calorieCount} />
-                <InfoCard type="Protéines" value={keyData.proteinCount} />
-                <InfoCard type="Glucides" value={keyData.carbohydrateCount} />
-                <InfoCard type="Lipides" value={keyData.lipidCount} />
-            </InfoListContainer>
-        
+            <InfoCard type="Calories" value={keyData.calorieCount} />
+            <InfoCard type="Protéines" value={keyData.proteinCount} />
+            <InfoCard type="Glucides" value={keyData.carbohydrateCount} />
+            <InfoCard type="Lipides" value={keyData.lipidCount} />
+        </InfoListContainer>
+
     )
 }
 

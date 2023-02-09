@@ -1,48 +1,44 @@
 import styled from "styled-components";
 import { styleVar } from "../utils/styleColor";
-
-
-import { getPerformanceById } from "../service/user.service";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from "recharts";
+import { getPerformanceById } from "../service/user.service";
 
 export default function Performance() {
-    const [data, setData] = useState();
+    
 
-    /**
-     * Get performance data from API
-     * Format data to display it in the chart
-     * Set data in state
-     * @returns {void}
-     * @param {number} id
-     * @param {object} data
-     * @param {object} formatData
-     * 
-     */
-
-    useEffect(() => {
-        getPerformanceById(18).then((data) => {
-            const formatData = data.data.data.map((data) => {
-                switch (data.kind) {
-                    case 1:
-                        return { ...data, kind: 'Cardio' };
-                    case 2:
-                        return { ...data, kind: 'Energie' };
-                    case 3:
-                        return { ...data, kind: 'Endurance' };
-                    case 4:
-                        return { ...data, kind: 'Force' };
-                    case 5:
-                        return { ...data, kind: 'Vitesse' };
-                    case 6:
-                        return { ...data, kind: 'Intensité' };
-                    default:
-                        return { ...data };
-                }
-            });
-            setData(formatData);
-        });
-    }, []);
+    const [data, setData] = useState([])
+    let { id } = useParams()
+  
+  useEffect(() => {
+    const data = async () => {
+      const response = await getPerformanceById(id)
+      console.log(response)
+      if(!response) return alert('Une erreur est survenue')
+      const formatData = response.data.data.map((data) => {
+                
+        switch (data.kind) {
+            case 1:
+                return { ...data, kind: 'Cardio' };
+            case 2:
+                return { ...data, kind: 'Energie' };
+            case 3:
+                return { ...data, kind: 'Endurance' };
+            case 4:
+                return { ...data, kind: 'Force' };
+            case 5:
+                return { ...data, kind: 'Vitesse' };
+            case 6:
+                return { ...data, kind: 'Intensité' };
+            default:
+                return {...data };
+        }
+    });
+    setData(formatData);
+    }
+    data()
+  }, [id])
 
     
     return (

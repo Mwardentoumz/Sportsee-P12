@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { styleVar } from '../utils/styleColor';
+import { useParams } from 'react-router-dom';
 
 import { getUserName } from '../service/user.service';
 import { useEffect, useState } from 'react';
@@ -16,19 +17,26 @@ export default function SimpleChart() {
      * @param {object} score
      * 
      */
-    const [data, setData] = useState()
-    useEffect(() => {
-        getUserName(18).then((data) => {
-            setData(data.data.score)
-        })
-    }, [])
+    const [data, setData] = useState([]);
+    const { id } = useParams();
+  
+  useEffect(() => {
+    const data = async () => {
+      const request = await getUserName(id);
+      console.log(request);
+      if (!request) return alert("data error");
+      setData(request.data);
+    };
+    data();
+  }, [id]);
+  if (data.length === 0) return null;
 
-    const score = data
+    const score = data.todayScore
     
     const data01 = [
         { "name": "todayscore", "value": score, "fillColor": `${styleVar.primary500}` }, { "name": "notdoneyet", "value": 1 - score, "fillColor": "transparent" }]
     const data02 = [{ "name": "fillInWhite", "value": 1 }]
-    console.log(data01)
+    
 
     return (
         <SimpleChartContainer>

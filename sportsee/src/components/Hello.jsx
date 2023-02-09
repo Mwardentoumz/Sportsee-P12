@@ -1,37 +1,20 @@
 
-import { getUserName } from '../service/user.service';
+
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
 
 
 
-export default function Hello(){
+
+export default function Hello({name}){
 
 /**
- * Get user data from API
- * Set data in state
- * @returns {void}
- * @param {number} id
- * @param {object} data
+ * 
+ * @returs {JSX}
  * 
  */
-
-// get the name of the user with a hook via service call
-
-const [firstName, setFirstName] = useState(''); // useState is a hook
-
-useEffect(() => {
-    getUserName(12).then((data)=> {
-        setFirstName(data.data.userInfos.firstName)})
-     },[]) // getUserName is a service call
-
-
-
-
-
 return(
         <Title>
-            <h1>Bonjour {firstName}</h1>
+            <h1>Bonjour {name}</h1>
             <Bravo>Félicitation ! Vous avez explosé vos objectifs hier 👏</Bravo>
         </Title>
     )

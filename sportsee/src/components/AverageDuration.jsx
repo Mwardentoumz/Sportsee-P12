@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { styleVar } from "../utils/styleColor";
-
+import { useParams } from "react-router-dom";
 import { getAverageSessionsById } from "../service/user.service";
 import { useEffect, useState } from "react";
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
@@ -17,16 +17,39 @@ export default function AverageDuration() {
      */
 
     const [data, setData] = useState()
+    let { id } = useParams()
+
     useEffect(() => {
-        getAverageSessionsById(18).then((data) => {
-            setData(data.data.sessions);
-        });
-    }, []);
+        const data = async () => {
+          const request = await getAverageSessionsById(id);
+          if (!request) return alert("data error");
+          console.log(request)
+          const formatData = request.data.sessions.map((data) => {
+          
+            switch (data.day) {
+              case 1:
+                return { ...data, day: "L" };
+              case 2:
+                return { ...data, day: "M" };
+              case 3:
+                return { ...data, day: "M" };
+              case 4:
+                return { ...data, day: "J" };
+              case 5:
+                return { ...data, day: "V" };
+              case 6:
+                return { ...data, day: "S" };
+              case 7:
+                return { ...data, day: "D" };
+              default:
+                return { ...data };
+            }
+          });
+          setData(formatData);
+        };
+        data();
+      }, [id]);
 
-    
-
-    const Duration = data
-    
     return (
         <AverageDurationContainer>
             <SessionTitre>Durée moyenne des
@@ -36,7 +59,7 @@ export default function AverageDuration() {
 
             <ResponsiveContainer width="100%" aspect={0.98}>
                 <LineChart
-                    data={Duration}
+                    data={data}
                     outerRadius="100%"
                     margin={{ top: 0, right: 12, bottom: 24, left: 12 }}
                 >
