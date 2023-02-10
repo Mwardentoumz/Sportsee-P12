@@ -10,11 +10,11 @@ export default function Performance() {
 
     const [data, setData] = useState([])
     let { id } = useParams()
+    let mock = false
   
   useEffect(() => {
     const data = async () => {
-      const response = await getPerformanceById(id)
-      console.log(response)
+      const response = await getPerformanceById(id, mock)
       if(!response) return alert('Une erreur est survenue')
       const formatData = response.data.data.map((data) => {
                 
@@ -38,7 +38,7 @@ export default function Performance() {
     setData(formatData);
     }
     data()
-  }, [id])
+  }, [id, mock])
 
     
     return (

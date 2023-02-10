@@ -17,14 +17,13 @@ function App() {
 
   const [data, setData] = useState([]);
   const { id } = useParams();
-  let mock = true
+  let mock = false
 
  
   
   useEffect(() => {
     const data = async () => {
       const request = await getUserName(id, mock);
-      console.log(request)
       if (!request) return alert("data error");
       if(mock){
       setData(request);}

@@ -18,15 +18,20 @@ export default function DailyChart() {
 
   const [data, setData] = useState([])
   let { id } = useParams()
+  let mock = false
   
   useEffect(() => {
     const data = async () => {
-      const response = await getDailyActivityById(id)
+      const response = await getDailyActivityById(id, mock)
       if(!response) return alert('Une erreur est survenue')
-      setData(response.data.sessions)
+      if(mock){
+        setData(response)
+      }
+      if(!mock){
+      setData(response.data.sessions)}
     }
     data()
-  }, [id])
+  }, [id, mock])
 
   for(let i = 0; i < data.length; i++) {
     data[i].day = i + 1

@@ -19,20 +19,23 @@ export default function SimpleChart() {
      */
     const [data, setData] = useState([]);
     const { id } = useParams();
+    let mock = false;
   
   useEffect(() => {
     const data = async () => {
-      const request = await getUserName(id);
+      const request = await getUserName(id, mock);
       console.log(request);
-      if (!request) return alert("data error");
-      setData(request.data);
+      if(mock){
+        setData(request);}
+        if(!mock){
+          setData(request.data);
+        }
     };
     data();
-  }, [id]);
+  }, [id, mock]);
   if (data.length === 0) return null;
 
     const score = data.score
-    console.log(score)
     
     const data01 = [
         { "name": "todayscore", "value": score, "fillColor": `${styleVar.primary500}` }, { "name": "notdoneyet", "value": 1 - score, "fillColor": "transparent" }]
