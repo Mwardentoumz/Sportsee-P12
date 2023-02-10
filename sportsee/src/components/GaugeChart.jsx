@@ -31,7 +31,8 @@ export default function SimpleChart() {
   }, [id]);
   if (data.length === 0) return null;
 
-    const score = data.todayScore
+    const score = data.score
+    console.log(score)
     
     const data01 = [
         { "name": "todayscore", "value": score, "fillColor": `${styleVar.primary500}` }, { "name": "notdoneyet", "value": 1 - score, "fillColor": "transparent" }]

@@ -212,7 +212,7 @@ import {
     static getFirstNameById(userId) {
       for (let user of USER_MAIN_DATA) {
         if (user.id === userId) {
-          return user.userInfos.firstName;
+          return user
         }
       }
   

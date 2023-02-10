@@ -1,4 +1,7 @@
-import axios from 'axios'; 
+import axios from 'axios';
+import { USER_MAIN_DATA } from './mockedData';
+import MockedAPI from './mockedAPI';
+
 
 
 const URL = 'http://localhost:3000';
@@ -10,51 +13,63 @@ const URL = 'http://localhost:3000';
  *  
  */
 
-export async function getUserName(userId) {
+// switch between mock and real API
 
-    try{
-        const response = await axios.get(`${URL}/user/${userId}`);
-        return response.data
-    }catch(error) {
-        return [];
+
+
+
+
+
+
+export async function getUserName(userId, mock) {
+    if (mock) {
+        const res = MockedAPI.getFirstNameById(Number(userId))
+        return res
+    } else {
+        try {
+            const response = await axios.get(`${URL}/user/${userId}`);
+            return response.data
+        } catch (error) {
+            return [];
+        }
+
     }
-    
 }
 
 
 
-export async function getDailyActivityById(userId){
-    try{
+export async function getDailyActivityById(userId) {
+    try {
         const response = await axios.get(`${URL}/user/${userId}/activity`);
         return response.data
-    }catch(error) {
+    } catch (error) {
         return [];
     }
 }
 
-export async function getAverageSessionsById(userId){
-    try{
+export async function getAverageSessionsById(userId) {
+    try {
         const response = await axios.get(`${URL}/user/${userId}/average-sessions`);
         return response.data
-    }catch(error) {
+    } catch (error) {
         return [];
     }
 }
 
-export async function getPerformanceById(userId){
-    try{
+export async function getPerformanceById(userId) {
+    try {
         const response = await axios.get(`${URL}/user/${userId}/performance`);
         return response.data
-    }catch(error) {
+    } catch (error) {
         return [];
     }
 }
 
-export async function getGaugeById(userId){
-    try{
+export async function getGaugeById(userId) {
+    try {
         const response = await axios.get(`${URL}/user/${userId}/performance`);
         return response.data
-    }catch(error) {
+    } catch (error) {
         return [];
     }
 }

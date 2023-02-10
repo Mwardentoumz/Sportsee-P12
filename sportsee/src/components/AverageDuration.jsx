@@ -54,14 +54,14 @@ export default function AverageDuration() {
         <AverageDurationContainer>
             <SessionTitre>Durée moyenne des
                 <br />
-                sessions
+                sessions en mn
             </SessionTitre>
 
             <ResponsiveContainer width="100%" aspect={0.98}>
                 <LineChart
                     data={data}
                     outerRadius="100%"
-                    margin={{ top: 0, right: 12, bottom: 24, left: 12 }}
+                    margin={{ top: 125, right: 12, bottom: 24, left: 12 }}
                 >
                     <XAxis
                         dataKey="day"
@@ -76,8 +76,13 @@ export default function AverageDuration() {
                     />
                     <YAxis
                         dataKey="sessionLength"
-                        domain={[0, "dataMax + 60"]}
-                        hide={true}
+                        domain={[0, "dataMax"]}
+                        hide={false}
+                        orientation="right"
+                        interval="preserveEnd"
+                        stroke={"rgba(255, 255, 255, 0.8)"}
+                        scale="auto"
+                        
                     />
                     <Line
                         dataKey="sessionLength"
