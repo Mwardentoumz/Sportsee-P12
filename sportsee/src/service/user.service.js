@@ -1,7 +1,13 @@
 import axios from 'axios';
 import MockedAPI from './mockedAPI';
 
-
+export const user_service ={
+    getUserName,
+    getDailyActivityById,
+    AverageSessionsById,
+    getPerformanceById,
+    getGaugeById
+}
 
 const URL = 'http://localhost:3000';
 
@@ -12,19 +18,7 @@ const URL = 'http://localhost:3000';
  *  
  */
 
-// switch between mock and real API
-
-
-
-
-
-
-
-export async function getUserName(userId, mock) {
-    if (mock) {
-        const res = MockedAPI.getFirstNameById(Number(userId))
-        return res
-    } else {
+export async function getUserName(userId) {
         try {
             const response = await axios.get(`${URL}/user/${userId}`);
             return response.data
@@ -33,7 +27,7 @@ export async function getUserName(userId, mock) {
         }
 
     }
-}
+
 
 
 

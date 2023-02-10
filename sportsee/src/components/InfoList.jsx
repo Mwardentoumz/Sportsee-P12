@@ -22,16 +22,21 @@ export default function InfoList() {
 
     const [data, setData] = useState([]);
     const { id } = useParams();
+    let mock = false;
 
     useEffect(() => {
         const data = async () => {
-            const request = await getUserName(id);
-            console.log(request)
-            if (!request) return alert("data error");
+          const request = await getUserName(id, mock);
+          if (!request) return alert("data error");
+          if(mock){
+          setData(request);}
+          if(!mock){
             setData(request.data);
+          }
         };
         data();
-    }, [id]);
+      }, [id, mock]);
+      if (data.length === 0) return null;
 
     const keyData = data.keyData
 

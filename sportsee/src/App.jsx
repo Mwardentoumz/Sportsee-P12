@@ -10,29 +10,26 @@ import SimpleChart from './components/GaugeChart';
 import InfoList from './components/InfoList';
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { getUserName } from './service/user.service';
+
+import getUserService from './service/user.service.config';
 
 
 function App() {
 
   const [data, setData] = useState([]);
   const { id } = useParams();
-  let mock = false
-
  
   
   useEffect(() => {
     const data = async () => {
-      const request = await getUserName(id, mock);
+      const request = await getUserService().getUserName(id);
+      console.log(request)
       if (!request) return alert("data error");
-      if(mock){
-      setData(request);}
-      if(!mock){
-        setData(request.data);
-      }
+      setData(request.data);
+      
     };
     data();
-  }, [id, mock]);
+  }, [id, ]);
   if (data.length === 0) return null;
 
   

@@ -218,6 +218,18 @@ import {
   
       return "Unknown User";
     }
+
+     getUserName(userId) {
+      console.log(userId)
+      for (let user of USER_MAIN_DATA) {
+        
+        if (user.id === Number(userId)) {
+          return {data:user}
+        }
+      }
+  
+      return "Unknown User";
+    }
   
     /**
      * @param {number} userId
