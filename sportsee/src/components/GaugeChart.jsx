@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { styleVar } from '../utils/styleColor';
 import { useParams } from 'react-router-dom';
-
-import { getUserName } from '../service/user.service';
+import getUserService from '../service/user.service.config';
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts';
 
@@ -19,20 +18,16 @@ export default function SimpleChart() {
      */
     const [data, setData] = useState([]);
     const { id } = useParams();
-    let mock = false;
   
   useEffect(() => {
     const data = async () => {
-      const request = await getUserName(id, mock);
-      console.log(request);
-      if(mock){
-        setData(request);}
-        if(!mock){
-          setData(request.data);
-        }
-    };
+        const request = await getUserService().getUserName(id);
+        if (!request) return alert("data error");
+        setData(request.data);
+        
+      };
     data();
-  }, [id, mock]);
+  }, [id]);
   if (data.length === 0) return null;
 
     const score = data.score

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { styleVar } from '../utils/styleColor';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getDailyActivityById } from '../service/user.service';
+
+import getUserService from '../service/user.service.config';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function DailyChart() {
@@ -18,20 +19,19 @@ export default function DailyChart() {
 
   const [data, setData] = useState([])
   let { id } = useParams()
-  let mock = false
+  
   
   useEffect(() => {
     const data = async () => {
-      const response = await getDailyActivityById(id, mock)
+      const response = await getUserService().getDailyActivityById(id)
+      console.log(response)
       if(!response) return alert('Une erreur est survenue')
-      if(mock){
-        setData(response)
-      }
-      if(!mock){
-      setData(response.data.sessions)}
-    }
+      
+      setData(response.data);
+      
+    };
     data()
-  }, [id, mock])
+  }, [id])
 
   for(let i = 0; i < data.length; i++) {
     data[i].day = i + 1

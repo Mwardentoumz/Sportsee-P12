@@ -23,13 +23,12 @@ function App() {
   useEffect(() => {
     const data = async () => {
       const request = await getUserService().getUserName(id);
-      console.log(request)
       if (!request) return alert("data error");
       setData(request.data);
       
     };
     data();
-  }, [id, ]);
+  }, [id ]);
   if (data.length === 0) return null;
 
   

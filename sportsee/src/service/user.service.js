@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockedAPI from './mockedAPI';
 
-export const user_service ={
+export const user_service = {
     getUserName,
     getDailyActivityById,
     AverageSessionsById,
@@ -19,62 +19,48 @@ const URL = 'http://localhost:3000';
  */
 
 export async function getUserName(userId) {
-        try {
-            const response = await axios.get(`${URL}/user/${userId}`);
-            return response.data
-        } catch (error) {
-            return [];
-        }
-
+    try {
+        const response = await axios.get(`${URL}/user/${userId}`);
+        return response.data
+    } catch (error) {
+        return [];
     }
 
+}
 
 
 
-export async function getDailyActivityById(userId, mock) {
-    if (mock) {
-        const res = new MockedAPI.getDailyActivityById(Number(userId))
-        return res
-    } else {
-        try {
-            const response = await axios.get(`${URL}/user/${userId}/activity`);
-            return response.data
-        } catch (error) {
-            return [];
-        }
+
+export async function getDailyActivityById(userId) {
+    try {
+        const response = await axios.get(`${URL}/user/${userId}/activity`);
+        console.log(response.data.data.sessions)
+        return {data:response.data.data.sessions}
+    } catch (error) {
+        return [];
     }
 }
 
 export async function AverageSessionsById(userId, mock) {
-    if (mock) {
-        const res = new MockedAPI.getAverageSessionsById(Number(userId))
-        console.log(res)
-        return res
-    } else {
-        try {
-            const response = await axios.get(`${URL}/user/${userId}/average-sessions`);
-            return response.data
-        } catch (error) {
-            return [];
-        }
+
+    try {
+        const response = await axios.get(`${URL}/user/${userId}/average-sessions`);
+        return response.data
+    } catch (error) {
+        return [];
     }
 }
 
-export async function getPerformanceById(userId, mock) {
-    if (mock) {
-        const res = MockedAPI.getDailyActivitiesById(Number(userId))
-        console.log(res)
-        return res
-    }
-    else {
-        try {
-            const response = await axios.get(`${URL}/user/${userId}/performance`);
-            return response.data
-        } catch (error) {
-            return [];
-        }
+export async function getPerformanceById(userId) {
+
+    try {
+        const response = await axios.get(`${URL}/user/${userId}/performance`);
+        return response.data
+    } catch (error) {
+        return [];
     }
 }
+
 
 export async function getGaugeById(userId) {
     try {

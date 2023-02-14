@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import InfoCard from "./Info";
 import { useParams } from "react-router-dom";
-
+import getUserService from "../service/user.service.config";
 import { getUserName } from "../service/user.service";
 import { useEffect, useState } from "react";
 
@@ -22,20 +22,16 @@ export default function InfoList() {
 
     const [data, setData] = useState([]);
     const { id } = useParams();
-    let mock = false;
 
     useEffect(() => {
-        const data = async () => {
-          const request = await getUserName(id, mock);
-          if (!request) return alert("data error");
-          if(mock){
-          setData(request);}
-          if(!mock){
-            setData(request.data);
-          }
-        };
+      const data = async () => {
+        const request = await getUserService().getUserName(id);
+        if (!request) return alert("data error");
+        setData(request.data);
+        
+      };
         data();
-      }, [id, mock]);
+      }, [id]);
       if (data.length === 0) return null;
 
     const keyData = data.keyData

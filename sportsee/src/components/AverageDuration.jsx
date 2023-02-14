@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { styleVar } from "../utils/styleColor";
 import { useParams } from "react-router-dom";
-import { AverageSessionsById } from "../service/user.service";
+import getUserService from "../service/user.service.config";
 import { useEffect, useState } from "react";
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
 
@@ -18,11 +18,11 @@ export default function AverageDuration() {
 
     const [data, setData] = useState()
     let { id } = useParams()
-    let mock = false
 
     useEffect(() => {
         const data = async () => {
-          const request = await AverageSessionsById(id, mock);
+          const request = await getUserService().AverageSessionsById(id);
+          console.log(request)
           if (!request) return alert("data error");
           const formatData = request.data.sessions.map((data) => {
             switch (data.day) {
@@ -47,7 +47,7 @@ export default function AverageDuration() {
           setData(formatData);
         };
         data();
-      }, [id, mock]);
+      }, [id]);
 
     return (
         <AverageDurationContainer>

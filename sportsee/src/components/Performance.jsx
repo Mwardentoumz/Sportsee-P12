@@ -3,18 +3,18 @@ import { styleVar } from "../utils/styleColor";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from "recharts";
-import { getPerformanceById } from "../service/user.service";
+import getUserService from "../service/user.service.config";
 
 export default function Performance() {
     
 
     const [data, setData] = useState([])
     let { id } = useParams()
-    let mock = false
+    
   
   useEffect(() => {
     const data = async () => {
-      const response = await getPerformanceById(id, mock)
+      const response = await getUserService().getPerformanceById(id)
       if(!response) return alert('Une erreur est survenue')
       const formatData = response.data.data.map((data) => {
                 
@@ -38,7 +38,7 @@ export default function Performance() {
     setData(formatData);
     }
     data()
-  }, [id, mock])
+  }, [id])
 
     
     return (
